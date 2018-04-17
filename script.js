@@ -1,9 +1,10 @@
-var finalRomanNumber = [];
-var convertedElement = "";
-var threeDigitNumber = "";
-var fourDigitNumber = "";
 
-function convertToRomanNumberal(num){
+function convertToRoman(num){
+
+    var finalRomanNumber = [];
+    var convertedElement = "";
+    var threeDigitNumber = "";
+    var fourDigitNumber = "";
 
     var convertedNumber = num.toString();
     
@@ -12,7 +13,7 @@ function convertToRomanNumberal(num){
     if(digits > 4){
         alert('Please insert a number that is composed of maximum 4 digits');
     } else {
-            
+                        
             if(digits === 1) {
                 for(var i = 1; i <= convertedNumber ; i++) {
                      convertedElement += 'I';
@@ -46,49 +47,61 @@ function convertToRomanNumberal(num){
             }
     }
     
-    //function that loops and slices the string, forming the coresponding Roman Numerals  for the last two digits in a number
+    //formi the coresponding Roman Numerals  for the last two digits in a number
     function lastTwoDigitLoop(firstIndex, secondIndex){
      
             for(var j = 1; j <= convertedNumber[firstIndex]; j++){
-                    convertedElement += 'X';
-                     if(j === 4) {
-                        convertedElement = 'XL'; 
-                    } else if( j === 5) {
-                        convertedElement = "L";
-                    } else if( j > 9 ){
-                        convertedElement+='X';
-                    } else if(j === 9) {
-                        convertedElement = 'XC';
+                    convertedElement += 'X';                
+                    switch(j){
+                        case 4 :
+                            convertedElement = 'XL'; 
+                        break;
+                        case 5 :
+                            convertedElement = 'L'; 
+                        break;
+                        case j > 9 :
+                            convertedElement = 'X'; 
+                        break;
+                        case 9 :
+                            convertedElement = 'XC';
+                        break;
                     }
              }
         
                  for(var k = 1; k <=convertedNumber[secondIndex]; k++) {
                     convertedElement += 'I';
-                    if (k === 4) {
-                        convertedElement = convertedElement.slice(0, -4);
-                        convertedElement += 'IV';
-                    } 
-                     else if ( k === 5 ) {
-                         convertedElement = convertedElement.slice(0, -3);
-                        convertedElement += 'V';
-                    } else if( k === 9) {
-                        convertedElement = convertedElement.slice(0, -5);
-                    convertedElement += 'IX';
-                    }
+
+                    switch(k){
+                        case 4:
+                            convertedElement = convertedElement.slice(0, -4);
+                            convertedElement += 'IV';
+                        break;
+                        case 5:
+                            convertedElement = convertedElement.slice(0, -3);
+                            convertedElement += 'V';
+                        break;
+                        case 9:
+                            convertedElement = convertedElement.slice(0, -5);
+                            convertedElement += 'IX';
+                        break;
+                    }                 
                 }
     }
     function lastThreeDigitsLoop(firstDigitIndex, secondDigitIndex, thirdDigitIndex) {
         for(var i = 1; i <= convertedNumber[firstDigitIndex]; i++) {
                     
                     threeDigitNumber += 'C';
-                    if( i === 4) {
-                        threeDigitNumber = 'CD';
-                    } else if(i === 5) {
-                        threeDigitNumber = 'D';
-                    } else if(i === 9) {
-                        threeDigitNumber = 'CM'
-                    }
-                    
+                    switch(i) {
+                        case 4:
+                            threeDigitNumber = 'CD';
+                        break;
+                        case 5:
+                            threeDigitNumber = 'D';
+                        break;
+                        case 9:
+                            threeDigitNumber = 'CM';
+                        break;
+                    }                    
                 }
                     lastTwoDigitLoop(secondDigitIndex,thirdDigitIndex);
                      threeDigitNumber += convertedElement;
@@ -96,8 +109,12 @@ function convertToRomanNumberal(num){
         
         
     }
+  
+  num = convertedElement;
     console.log(convertedElement);
+    
+  return num;
     
 }
                          
-convertToRomanNumberal(4555);
+convertToRoman(567);
